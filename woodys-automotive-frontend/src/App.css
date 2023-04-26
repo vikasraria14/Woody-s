@@ -1,0 +1,185 @@
+.PostWrapper{
+  display: flex;
+  margin: 1%;
+  width: 60%;
+}
+.formWrapper{
+  text-align: center;
+  width: 40%;
+}
+.postUser{
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  color: white;
+  font-size: small;
+}
+
+.card{
+  background-color: white;
+  color: black;
+  margin: 1%;
+  width: 270px;
+  border-radius: 15px;
+  min-height: 350px;
+}
+
+.card-title {
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.card-body {
+  flex: 1 1 auto;
+  padding: 1rem 1rem;
+  padding-top: 0px;
+  padding-bottom: 2rem;
+  
+}
+.card-text{
+  height: 100px;
+  overflow: auto;
+}
+.tags {
+  color: grey;
+  margin-bottom: 10px;
+  font-size: smaller;
+}
+.headWrapper {
+  background-color: rgb(5, 5, 129);
+  padding-left: 20px;
+  color: white;
+  border-radius: 10px;
+  
+  /* margin: 20px; */
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  position: relative;
+}
+.logOut{
+ 
+  color: white;
+  height: 30px;
+  position: absolute;
+  right: 1%;
+  top: 20%;
+}
+.booking{
+ 
+  color: white;
+  height: 30px;
+  position: absolute;
+  right: 12%;
+  top: 20%;
+}
+.row{
+  width: 100%;
+}
+body{
+  height: 100vh;
+}
+
+
+
+.loginWrapper{
+  width: 70%;
+  background-color:green;
+  height: 70%;
+  margin: 10%;
+  
+}
+
+
+.mainWrapper{
+  
+ 
+  height: 100%;
+  margin-left: 15%;
+  margin-right: 15%;
+}
+.mainWrapper1 {
+  display: flex;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.buttonWrapper {
+  display: flex;
+  position: absolute;
+  bottom: 30px;
+  width: 100%;
+  color: grey;
+  font-size: smaller;
+}
+.icon{
+  width: 20px;
+  height: 20px;
+}
+.like{
+  position: absolute;
+  left: 2px;
+}
+.delete{
+  position: absolute;
+  right: 25px;
+}
+
+.like, .delete{
+  cursor: pointer;
+}
+form{
+  background-color: white;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 15px;
+  
+  
+}
+
+
+h3{
+  margin-bottom: 20px;
+}
+.inputs{
+  border: 1px solid grey;
+  width: 90%;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+.inputs1{
+  margin-bottom: 20px;
+}
+.button1{
+  background-color: blue;
+  color: white;
+}
+
+@media (max-width: 1359px) {
+  .mainWrapper{
+    margin: 0%;
+  }
+  
+}
+@media (max-width: 970px) {
+  .mainWrapper1{
+    display: block;
+    margin: auto;
+  }
+  .PostWrapper{
+    width: 100%;
+    align-content: center;
+  }
+  .formWrapper{
+    width: 80%;
+  }
+  form{
+    width: 100%;
+  }
+}
+
+.error{
+  color: red;
+  min-height: 10px;
+  max-height: 10px;
+}
+

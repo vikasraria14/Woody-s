@@ -1,0 +1,55 @@
+export const carData = [
+    {
+      id: 1,
+      make: "Toyota",
+      model: "Camry",
+      year: 2017,
+      color: "Silver",
+      licensePlate: "ABC123",
+      mileage: 50000,
+      lastServiceDate: "2022-03-15",
+    },
+    {
+      id: 2,
+      make: "Honda",
+      model: "Civic",
+      year: 2018,
+      color: "Blue",
+      licensePlate: "XYZ789",
+      mileage: 40000,
+      lastServiceDate: "2022-04-10",
+    },
+    {
+      id: 3,
+      make: "Ford",
+      model: "F-150",
+      year: 2020,
+      color: "Black",
+      licensePlate: "DEF456",
+      mileage: 30000,
+      lastServiceDate: "2022-02-20",
+    },
+    {
+      id: 4,
+      make: "Chevrolet",
+      model: "Equinox",
+      year: 2019,
+      color: "White",
+      licensePlate: "GHI789",
+      mileage: 45000,
+      lastServiceDate: "2022-01-05",
+    },
+    {
+      id: 5,
+      make: "Nissan",
+      model: "Rogue",
+      year: 2016,
+      color: "Red",
+      licensePlate: "JKL123",
+      mileage: 55000,
+      lastServiceDate: "2022-03-25",
+    },
+  ];
+  
+ 
+  

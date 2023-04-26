@@ -1,0 +1,34 @@
+let data = [
+    {
+        name: "Angad",
+        class: "it",
+        marks: 20,
+    },
+    {
+        name: "Chetan",
+        class: "cse",
+        marks: 24,
+    },
+    {
+        name: "Deepak",
+        class: "ece",
+        marks: 30,
+    },
+    {
+        name: "Himanshu",
+        class: "eee",
+        marks: 43,
+    },
+    {
+        name: "Pritam",
+        class: "it",
+        marks: 58,
+    }
+]
+
+const comparator=(a,b)=>{
+    return a.marks-b.marks;
+}
+
+data= data.sort(comparator);
+console.log(data);
