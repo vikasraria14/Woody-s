@@ -19,10 +19,11 @@
 body, html {
 	height: 100%;
 	font-family: Poppins-Regular, sans-serif;
-  background: -webkit-linear-gradient(-135deg, #c850c0, #4158d0);
+  /* background: -webkit-linear-gradient(-135deg, #c850c0, #4158d0);
   background: -o-linear-gradient(-135deg, #c850c0, #4158d0);
   background: -moz-linear-gradient(-135deg, #c850c0, #4158d0);
-  background: linear-gradient(90deg, #c850c0, #4158d0);
+  background: linear-gradient(90deg, #c850c0, #4158d0); */
+  background-color: white;
 }
 
 /*---------------------------------------------*/

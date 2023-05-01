@@ -10,7 +10,8 @@ import VehicleListAdminMain from "./Components/VehicleList/VehicleListAdminMain"
 import ServiceModal from "./Components/ServiceInfo/ServiceInfoAdmin";
 import MyModal from "./Components/ServiceInfo/ServiceInfoUser";
 import Stats from "./Components/Stats/CityStats";
-
+import Register from "./Components/Register/Register"
+import Test from "./Components/Test/Test"
 const App = () => {
   const dispatch = useDispatch();
 //  const navigate = useNavigate();
@@ -38,6 +39,9 @@ const App = () => {
           <Route path="/serviceModal" element={<ServiceModal />} />
           <Route path="/myModal" element={<MyModal />} />
           <Route path="/stats" element={<Stats />} />
+          <Route path="/" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/test" element={<Test />} />
         </Routes>
         
       </div>

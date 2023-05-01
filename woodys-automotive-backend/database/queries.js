@@ -1,4 +1,5 @@
 const {connection} =require('./connection')
+const {locations, carData, serviceData}= require('../utils')
 const createUserTable =async () => {
   const createTableQuery = `
 CREATE TABLE IF NOT EXISTS users (
@@ -55,4 +56,75 @@ let get =(query,username)=>{
         });
       
 }
-module.exports ={createUserTable,insertIntoUser, searchUser}
+
+
+
+
+function insertIntoCustomer(name, username, phoneNumber,email) {
+  const sql = `
+    CREATE TABLE IF NOT EXISTS customers (
+      name VARCHAR(255) NOT NULL,
+      username VARCHAR(255) PRIMARY KEY,
+      phone_number VARCHAR(255) ,
+      email VARCHAR(255)
+    )
+  `;
+  
+  connection.query(sql, (err, result) => {
+    if (err) {
+      console.error('Error creating table:', err);
+      return;
+    }
+    console.log('Customer Table created successfully!');
+    
+    const insertSql = `
+      INSERT INTO customers (name, username, phone_number,email)
+      VALUES ('${name}', '${username}', '${phoneNumber}', '${email}')
+    `;
+    
+    connection.query(insertSql, (err, result) => {
+      if (err) {
+        console.error('Error inserting data:', err);
+        return;
+      }
+      console.log('Data inserted successfully!');
+    });
+  });
+}
+
+
+function insertIntoEmployee(name, username, phoneNumber,email) {
+  const sql = `
+    CREATE TABLE IF NOT EXISTS employees (
+      name VARCHAR(255) NOT NULL,
+      username VARCHAR(255) PRIMARY KEY,
+      phone_number VARCHAR(255) ,
+      email VARCHAR(255)
+    )
+  `;
+  
+  connection.query(sql, (err, result) => {
+    if (err) {
+      console.error('Error creating table:', err);
+      return;
+    }
+    console.log('Employees Table created successfully!');
+    
+    const insertSql = `
+      INSERT INTO employees (name, username, phone_number,email)
+      VALUES ('${name}', '${username}', '${phoneNumber}', '${email}')
+    `;
+    
+    connection.query(insertSql, (err, result) => {
+      if (err) {
+        console.error('Error inserting data:', err);
+        return;
+      }
+      console.log('Data inserted successfully!');
+    });
+  });
+}
+
+
+
+module.exports ={createUserTable,insertIntoUser, searchUser,insertIntoCustomer, insertIntoEmployee}

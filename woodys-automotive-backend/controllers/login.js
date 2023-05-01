@@ -1,7 +1,7 @@
 const jwt=require('jsonwebtoken')
 const bcryptjs=require('bcryptjs')
 const loginRouter=require('express').Router();
-const User=require('../models/user')
+
 loginRouter.get('/',async (req,res)=>{
    console.log("Here to get /login ")
    const AllUsers=await User.find({})

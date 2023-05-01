@@ -1,108 +1,135 @@
-import {
-	Link,
-     useNavigate
-} from "react-router-dom"
+import { Button, CircularProgress, Stack, TextField } from "@mui/material";
+import { Box } from "@mui/system";
+import axios from "axios";
+import { useSnackbar } from "notistack";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+//import { config } from "../../App";
+import Footer from "../Footer/Footer";
+import Header from "../Header/Header";
+import { useDispatch } from "react-redux";
+import { setLogin } from "../../Controllers/login";
+import { logInUser } from "../../Reducers/loggedInUserReducer";
+import "./Login.css";
 
-import image1 from './images/image-01.jpeg'
-import './font-awesome-4.7.0/css/font-awesome.min.css'
-import { setLogin } from "../../Controllers/login"
-import {  useDispatch } from 'react-redux'
-import {  useState } from "react"
-import { logInUser } from "../../Reducers/loggedInUserReducer"
-const Login=()=>{
-	const [errorMessage,setErrorMessage]=useState('')
-    const navigate = useNavigate()
-    
-	const [username,setUsername]=useState('default')
-	const [password,setPassword]=useState('default')
-    const dispatch = useDispatch();
-    
+const Login = () => {
+  const { enqueueSnackbar } = useSnackbar();
+  const [loader, setLoader] = useState(false);
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
+  });
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const updateVal = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
 
-    const login = async (event) => {
-        event.preventDefault();
-        
-        const data = { username, password }
-        const res = await setLogin(data);
-		if(res.err)
-		{
-			
-			setErrorMessage(res.err)
-			setTimeout(()=>{
-				setErrorMessage('')
-			},5000)
-		}
-		else
-		{
-			window.localStorage.setItem('loggedInUser', JSON.stringify(res))
-			console.log(res.user[0].userType)
-			
-			dispatch(logInUser(res))
-			if(res.user[0].userType==='user')
-			{
-				navigate('/userView')
-			}
-			else
-			{
-				navigate('/adminView')
-			}
-			
-		}
-        
-        
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+  const login = async (event) => {
+    event.preventDefault();
+
+    const data = { username: formData.username, password: formData.password };
+    let x = validateInput(data);
+    if (x) {
+      const res = await setLogin(data);
+      if (res.err) {
+        enqueueSnackbar(
+          "Something went wrong. Check that the backend is running, reachable and returns valid JSON.",
+          { variant: "error" }
+        );
+      } else {
+        window.localStorage.setItem("loggedInUser", JSON.stringify(res));
+        console.log(res.user[0].userType);
+
+        dispatch(logInUser(res));
+        if (res.user[0].userType === "user") {
+          navigate("/userView");
+        } else {
+          navigate("/adminView");
+        }
+        enqueueSnackbar("Logged in successfully", { variant: "success" });
+      }
     }
-    return(
-        <>
-        <div className="limiter">
-		<div className="container-login100">
-			<div className="wrap-login100">
-				<div className="login100-pic js-tilt" data-tilt>
-					<img src={image1} alt="IMG"/>
-				</div>
+  };
+  //const history = useHistory();
 
-				<form onSubmit={login} className="login100-form validate-form">
-					<span className="login100-form-title">
-					Welcome to Woody's Service Station
-					</span>
+  const validateInput = (data) => {
+    if (data.username === "") {
+      enqueueSnackbar("Username is a required field", { variant: "warning" });
+      return false;
+    } else if (data.password === "") {
+      enqueueSnackbar("Password is a required field", { variant: "warning" });
+      return false;
+    } else {
+      return true;
+    }
+  };
 
-					<div className="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-						<input className="input100" type="text" value={username} name="username" placeholder="Username" onChange={(event)=>{setUsername(event.target.value)}}/>
-						<span className="focus-input100"></span>
-						<span className="symbol-input100">
-							<i className="fa fa-envelope" aria-hidden="true"></i>
-						</span>
-					</div>
+  
 
-					<div className="wrap-input100 validate-input" data-validate = "Password is required">
-						<input className="input100" type="password" value={password} name="password" placeholder="Password" onChange={(event)=>{setPassword(event.target.value)}}/>
-						<span className="focus-input100"></span>
-						<span className="symbol-input100">
-							<i className="fa fa-lock" aria-hidden="true"></i>
-						</span>
-					</div>
+  return (
+    <Box
+      display="flex"
+      flexDirection="column"
+      justifyContent="space-between"
+      minHeight="100vh"
+    >
+      {/* <Header hasHiddenAuthButtons /> */}
+      <Box className="content">
+        <Stack spacing={2} className="form">
+          <h2 className="title">Login</h2>
+          <TextField
+            id="username"
+            label="Username"
+            variant="outlined"
+            title="Username"
+            name="username"
+            placeholder="Enter Username"
+            value={formData.username}
+            onChange={(e) => updateVal(e)}
+            fullWidth
+          />
+          <TextField
+            id="password"
+            variant="outlined"
+            label="Password"
+            name="password"
+            type="password"
+            helperText="Password must be atleast 6 characters length"
+            fullWidth
+            placeholder="Enter a password with minimum 6 characters"
+            value={formData.password}
+            onChange={(e) => updateVal(e)}
+          />
+          {!loader ? (
+            <Button
+              className="button"
+              variant="contained"
+              onClick={login}
+            >
+              LOGIN TO Woody's
+            </Button>
+          ) : (
+            <Box display="flex" justifyContent="center">
+              <CircularProgress />
+            </Box>
+          )}
+          <p className="secondary-action">
+            Don’t have an account?{" "}
+            <Link className="link" to="/register">
+              Register now
+            </Link>
+          </p>
+        </Stack>
+      </Box>
+      {/* <Footer /> */}
+    </Box>
+  );
+};
 
-					<div className="error">
-						{errorMessage}
-					</div>
-					
-					<div className="container-login100-form-btn">
-						<button className="login100-form-btn">
-							Login
-						</button>
-					</div>
-
-					
-
-					<div className="text-center p-t-136">
-						<Link to={'/signup'}  className="txt2" >
-							Create your Account
-							<i className="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
-						</Link>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-    </>
-    )
-}
 export default Login;

@@ -1,13 +1,13 @@
 const bcryptjs=require('bcryptjs');
 const signUpRouter=require('express').Router()
-const User=require('../models/user')
+
 signUpRouter.get('/',(req,res)=>{
     res.end('Signup')
 })
 const {connection} = require('../database/connection')
-const {createUserTable, insertIntoUser, searchUser} = require('../database/queries')
+const {createUserTable, insertIntoUser, searchUser, insertIntoCustomer, insertIntoEmployee} = require('../database/queries')
 signUpRouter.post('/',async (req,res)=>{
-    const {name,username,password}=req.body;
+    const {name,username,email,phone,password}=req.body;
     
     if(!name||!username||!password)
     {
@@ -25,10 +25,21 @@ signUpRouter.post('/',async (req,res)=>{
         const passwordHash=await bcryptjs.hash(password,saltRounds)
         console.log("here to register users")
         await createUserTable()
-        await insertIntoUser(name, username, passwordHash, "user")
+        const userType="user"
         
-        const newUser=new User({name,username,password:passwordHash});
-        await newUser.save();
+        await insertIntoUser(name, username, passwordHash, "user")
+
+        if(userType==="user")
+        {
+           insertIntoCustomer(name,username,phone,email)
+        }
+        else
+        {
+            insertIntoEmployee(name, username, phone, email)
+        }
+        
+        // const newUser=new User({name,username,password:passwordHash});
+        // await newUser.save();
         return res.end("User Created")
     
     

@@ -1,3 +1,4 @@
+const {a}= require('./manualInsertion')
 const {connection} =require('./connection')
 const createServiceTable =async () => {
   const createTableQuery = `
